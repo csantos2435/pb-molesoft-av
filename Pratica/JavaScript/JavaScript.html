@@ -1,0 +1,68 @@
+<meta charset="UTF-8">
+
+<h1>Bem Vindo!!</h1>
+<p>No campo a seguir, digite o valor que será calculado</p>
+
+<input type="Valor">
+<button>Calcular</button>
+
+<script>
+
+    function Calcular() {
+        var troco = document.querySelector("input").value;
+        var calculo
+        var resto = 0;
+        var totalMoedas = 0;
+        var total;
+
+        document.write("Total de moedas ultilizadas. <br>")
+        document.write("<br>")
+    
+        if (troco > 0.50) {
+            calculo = troco / 0.50;
+            document.write(Math.trunc(calculo) + " de 50 centavos <br>")
+            resto = troco % 0.50
+            totalMoedas += Math.trunc(calculo)
+        } else {
+            document.write("0 de 50 centavos <br>")
+        }
+        if (resto >= 0.25) {
+            calculo = resto / 0.25;
+            document.write(Math.trunc(calculo) + " de 25 centavos <br>")
+            resto = resto % 0.25;
+            totalMoedas += Math.trunc(calculo)
+        } else {
+            document.write("0 de 25 centavos <br>")
+        }
+        if (resto >= 0.10) {
+            calculo = resto / 0.10;
+            document.write(Math.trunc(calculo) + " de 10 centavos <br>")
+            resto = resto % 0.10;
+            totalMoedas += Math.trunc(calculo)
+        } else {
+            document.write("0 de 10 centavos <br>")
+        }
+        if (resto >= 0.05) {
+            calculo = resto / 0.05;
+            document.write(Math.trunc(calculo) + " de 5 centavos <br>")
+            resto = resto % 0.05;
+            totalMoedas += Math.trunc(calculo)
+        } else {
+            document.write("0 de 5 centavos <br>")
+        }
+        if (resto >= 0.01) {
+            calculo = resto / 0.01;
+            document.write(Math.trunc(calculo) + " de 1 centavos <br>")
+            totalMoedas += Math.trunc(calculo)
+        } else {
+            document.write("0 de 1 centavo <br>")
+        }
+        document.write("<br>")
+        document.write("Total de moedas: " + totalMoedas)
+        
+        return totalMoedas;
+    }
+
+    var button = document.querySelector("button");
+    button.onclick = Calcular;
+</script>
