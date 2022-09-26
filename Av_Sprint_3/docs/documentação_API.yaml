@@ -1,0 +1,250 @@
+openapi: 3.0.1
+info:
+  title: API - Estados Brasileiros
+  description: API Rest com Spring Framework para cadastro de estados brasileiros
+  version: 0.0.1
+  termsOfService: http://localhost:8080/api/v1/estados
+  contact:
+    email: camilersantos@gmail.com
+paths:
+  /api/v1/estados:
+    get:
+      tags:
+       - estado
+      summary: Lista todos os Estados
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Estados"
+    post:
+      tags:
+       - estado
+      summary: Cadastra um novo estado
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstadosId"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/Estados"
+  /api/v1/estados/{id}:
+    parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      tags:
+       - estado
+      summary: Lista um estado pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/Estados"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      tags:
+       - estado
+      summary: Atualizar um estado pelo ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstadosId"
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/Estados"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      tags:
+       - estado
+      summary: Deletar um estado pelo ID
+  /api/v1/usuarios:  
+    get:
+      tags:
+       - usuario
+      summary: Lista todos os Usuarios
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Usuarios"
+    post:
+      tags:
+       - usuario
+      summary: Cadastra um novo Usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuariosId"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/Usuarios"
+  /api/v1/usuarios/{id}:
+    parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    put:
+      tags:
+       - usuario
+      summary: Atualizar um usuario pelo ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuariosIdSenha"
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/Usuarios"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"    
+  /api/v1/autenticacao:
+    post:
+      tags:
+       - autenticacao
+      summary: Cadastro de usuario para autenticacao
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Autenticacao"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/AutenticacaoId"
+components:
+  schemas:
+    Estados:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        regiao:
+          type: string
+          description: O campo regiao aceita apenas estes cinco valores 
+          enum: 
+            - Norte 
+            - Nordeste 
+            - Sul
+            - Sudeste
+            - Centro_Oeste
+        populacao:
+          type: number
+        capital:
+          type: string
+        area:
+          type: number
+    EstadosId:
+      type: object
+      properties:
+        nome:
+          type: string
+        regiao:
+          type: string
+          description: O campo regiao aceita apenas estes cinco valores 
+          enum: 
+            - Norte 
+            - Nordeste 
+            - Sul
+            - Sudeste
+            - Centro_Oeste
+        populacao:
+          type: number
+        capital:
+          type: string
+        area:
+          type: number
+    Usuarios:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        senha: 
+          type: string
+    UsuariosId:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+        senha: 
+          type: string        
+    UsuariosIdSenha:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+    Autenticacao:
+      type: object
+      properties:
+        email:
+          type: string
+        senha:
+          type: string
+    AutenticacaoId:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        senha:
+          type: string
+  
