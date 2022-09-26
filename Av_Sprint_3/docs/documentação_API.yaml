@@ -3,7 +3,7 @@ info:
   title: API - Estados Brasileiros
   description: API Rest com Spring Framework para cadastro de estados brasileiros
   version: 0.0.1
-  termsOfService: http://localhost:8080/api/v1/estados
+  termsOfService: http://localhost:8080
   contact:
     email: camilersantos@gmail.com
 paths:
@@ -37,6 +37,8 @@ paths:
             application/json:
               schema:
                  $ref: "#/components/schemas/Estados"
+      security:
+        - auth: []
   /api/v1/estados/{id}:
     parameters: 
       - name: id
@@ -60,6 +62,8 @@ paths:
           content:
             application/json:
               example: "Not Found"
+      security:
+      - auth: []        
     put:
       tags:
        - estado
@@ -81,10 +85,21 @@ paths:
           content:
             application/json:
               example: "Not Found"
+      security:
+        - auth: []        
     delete:
       tags:
        - estado
       summary: Deletar um estado pelo ID
+      responses:
+        204:
+          description: Deletado
+        404:
+          description: Id not found
+        401:
+          description: Unauthorized
+      security:
+        - auth: []
   /api/v1/usuarios:  
     get:
       tags:
@@ -99,6 +114,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Usuarios"
+      security:
+      - auth: []            
     post:
       tags:
        - usuario
@@ -115,6 +132,8 @@ paths:
             application/json:
               schema:
                  $ref: "#/components/schemas/Usuarios"
+      security:
+      - auth: []          
   /api/v1/usuarios/{id}:
     parameters: 
       - name: id
@@ -143,6 +162,8 @@ paths:
           content:
             application/json:
               example: "Not Found"    
+      security:
+      - auth: []        
   /api/v1/autenticacao:
     post:
       tags:
@@ -247,4 +268,9 @@ components:
           type: string
         senha:
           type: string
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      
   
