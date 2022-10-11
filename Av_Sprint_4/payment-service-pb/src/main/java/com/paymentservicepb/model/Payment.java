@@ -57,21 +57,17 @@ public class Payment {
 	private Currency currency;
 	
 	@Positive
-	@NotNull @NotEmpty
 	private BigDecimal transaction_amount;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="payment")
 	private Card card;
 	
-	@NotNull @NotEmpty
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@NotNull @NotEmpty
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
 	private LocalDateTime received_at = LocalDateTime.now();
 	
-	@NotNull @NotEmpty
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="payment")
 	private Authorization authorization;
 
